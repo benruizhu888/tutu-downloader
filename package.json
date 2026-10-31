@@ -1,0 +1,97 @@
+{
+  "name": "tutu-downloader",
+  "productName": "兔兔下载器",
+  "version": "1.0.5",
+  "description": "兔兔下载器 - 小红书 / 微博 / 抖音 作者主页图片、视频与 Live 实况图下载",
+  "main": "src/main/main.js",
+  "author": "Tutu",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node tools/launch.js .",
+    "test": "node --test",
+    "e2e": "node tools/launch.js . --e2e",
+    "smoke": "node tools/launch.js . --smoke-test",
+    "nettest": "node tools/launch.js . --net-test=home:douyin",
+    "icons": "node tools/launch.js tools/make-icons.js",
+    "dist": "electron-builder --win --x64",
+    "dist:portable": "electron-builder --win portable --x64",
+    "dist:dir": "electron-builder --win --x64 --dir"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0"
+  },
+  "build": {
+    "appId": "com.tutu.downloader",
+    "productName": "兔兔下载器",
+    "copyright": "Copyright © 2026 Tutu",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "build/icon.png",
+      "package.json",
+      "!**/*.map",
+      "!**/*.md"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/@ffmpeg-installer/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "兔兔下载器-${version}-免安装版.${ext}",
+      "requestExecutionLevel": "user",
+      "unpackDirName": "tutu-portable"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "兔兔下载器",
+      "artifactName": "兔兔下载器-${version}-安装包.${ext}",
+      "installerLanguages": [
+        "zh_CN"
+      ],
+      "language": "2052"
+    },
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "icon": "build/icons",
+      "category": "Utility",
+      "target": [
+        "AppImage"
+      ]
+    }
+  }
+}

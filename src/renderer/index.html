@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https:;" />
+  <title>兔兔下载器</title>
+  <link rel="stylesheet" href="theme/harmony.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="window">
+    <!-- 自绘标题栏：标题居中，右侧依次是工具按钮 + 最小化/全屏/关闭 -->
+    <header class="titlebar">
+      <div class="titlebar-title">兔兔下载器</div>
+      <div class="titlebar-actions">
+        <button class="tb-btn" id="btnOpenDir" title="打开保存目录">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M1.5 4.2c0-.7.6-1.2 1.2-1.2h3l1.3 1.5h6.3c.7 0 1.2.6 1.2 1.2v6.1c0 .7-.6 1.2-1.2 1.2H2.7c-.7 0-1.2-.6-1.2-1.2V4.2Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          <span>下载目录</span>
+        </button>
+        <button class="tb-btn icon" id="btnSettings" title="设置">
+          <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="2.4" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 1.8v1.6M8 12.6v1.6M1.8 8h1.6M12.6 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M12.4 3.6l-1.1 1.1M4.7 11.3l-1.1 1.1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="win-controls">
+        <button class="wc wc-min" data-win="minimize" title="最小化">
+          <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.6 6h6.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="wc wc-max" data-win="maximize" title="全屏 / 还原">
+          <svg class="ico-max" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="2.4" y="2.4" width="7.2" height="7.2" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.15"/></svg>
+          <svg class="ico-restore" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><rect x="2.1" y="3.9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M4.2 3.7V3.2a1.2 1.2 0 0 1 1.2-1.2h3.1a1.2 1.2 0 0 1 1.2 1.2v3.1a1.2 1.2 0 0 1-1.2 1.2h-.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </button>
+        <button class="wc wc-close" data-win="close" title="关闭">
+          <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3.2 3.2l5.6 5.6M8.8 3.2l-5.6 5.6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon" id="brandIcon">
+            <img id="brandImg" alt="" />
+            <span class="brand-fallback">🐰</span>
+          </div>
+          <div class="brand-text">
+            <div class="brand-name">兔兔下载器</div>
+            <div class="brand-sub">Tutu Downloader</div>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav"></nav>
+
+        <div class="side-foot">
+          <button class="dir-card" id="dirCard">
+            <div class="dir-label">保存到</div>
+            <div class="dir-path" id="dirPath">—</div>
+          </button>
+          <div class="side-note" id="ffNote"></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="pg-head">
+          <div class="pg-head-left">
+            <h1 id="pgTitle">小红书</h1>
+            <p id="pgSub">粘贴作者主页链接 → 勾选作品 → 点击下载</p>
+          </div>
+          <div class="pg-head-right">
+            <span class="chip" id="loginChip"><i class="chip-dot"></i><span>检测登录状态…</span></span>
+          </div>
+        </div>
+
+        <div class="steps" id="steps">
+          <div class="step" data-step="1"><b>1</b><span>粘贴作者主页链接</span></div>
+          <div class="step-line"></div>
+          <div class="step" data-step="2"><b>2</b><span>勾选作品</span></div>
+          <div class="step-line"></div>
+          <div class="step" data-step="3"><b>3</b><span>点击下载</span></div>
+        </div>
+
+        <div class="input-row">
+          <div class="field" id="fieldWrap">
+            <svg class="field-icon" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M6.2 9.8a2.6 2.6 0 0 0 3.7 0l2.3-2.3a2.6 2.6 0 0 0-3.7-3.7l-1 1" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M9.8 6.2a2.6 2.6 0 0 0-3.7 0L3.8 8.5a2.6 2.6 0 0 0 3.7 3.7l1-1" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <input id="urlInput" type="text" spellcheck="false" autocomplete="off"
+                   placeholder="粘贴博主的作者主页链接，例如 https://www.xiaohongshu.com/user/profile/…" />
+            <button class="field-btn" id="btnPaste">粘贴</button>
+            <button class="field-clear" id="btnClear" title="清空">×</button>
+          </div>
+          <button class="btn primary" id="btnParse">
+            <span class="btn-label">开始解析</span>
+            <span class="spinner hidden" id="parseSpinner"></span>
+          </button>
+          <button class="btn subtle hidden" id="btnStop">停止加载</button>
+        </div>
+
+        <div class="status-bar hidden" id="statusBar">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">正在解析…</span>
+        </div>
+
+        <div class="workarea">
+          <section class="panel list-panel">
+            <div class="panel-head">
+              <div class="seg" id="seg">
+                <button class="seg-btn on" data-tab="works">作品</button>
+                <button class="seg-btn" data-tab="tasks">传输<span class="badge hidden" id="taskBadge">0</span></button>
+              </div>
+              <div class="panel-tools" id="worksTools">
+                <div class="tool-group">
+                  <button class="tool-btn" id="btnSelectAll">全选</button>
+                  <span class="tool-sep" aria-hidden="true"></span>
+                  <label class="tool-select">
+                    <select id="filterType" aria-label="按类型筛选">
+                      <option value="all">全部类型</option>
+                      <option value="image">仅图片</option>
+                      <option value="video">仅视频</option>
+                      <option value="live">仅实况</option>
+                    </select>
+                    <svg class="tool-chev" viewBox="0 0 10 10" width="9" height="9" aria-hidden="true">
+                      <path d="M2 3.8 5 6.8 8 3.8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-body" id="panelBody">
+              <div class="grid" id="workGrid"></div>
+
+              <div class="empty" id="emptyState">
+                <div class="empty-art">🐰</div>
+                <div class="empty-title">还没有作品</div>
+                <div class="empty-desc">复制博主主页链接粘贴到上方，点「开始解析」</div>
+              </div>
+
+              <div class="tasks hidden" id="taskList"></div>
+            </div>
+
+            <div class="panel-foot" id="panelFoot">
+              <div class="sel-info" id="selInfo">已选 0 个作品</div>
+              <div class="foot-actions">
+                <button class="btn ghost hidden" id="btnRetryFailed">重试失败项</button>
+                <button class="btn primary" id="btnDownload" disabled>下载选中</button>
+              </div>
+            </div>
+
+            <div class="sheet hidden" id="settingsSheet">
+              <div class="sheet-head">
+                <div>
+                  <div class="sheet-title">设置</div>
+                  <div class="sheet-sub">保存位置、并发与加载深度</div>
+                </div>
+                <button class="sheet-close" id="sheetClose">完成</button>
+              </div>
+              <div class="sheet-body">
+                <label class="row">
+                  <div class="row-label">保存位置</div>
+                  <div class="row-ctl"><button class="dir-mini" id="setDir">—</button></div>
+                </label>
+                <label class="row">
+                  <div class="row-label">同时下载</div>
+                  <div class="row-ctl">
+                    <input type="range" id="setConcurrency" min="1" max="6" step="1" />
+                    <span class="range-val" id="concurrencyVal">3</span>
+                  </div>
+                </label>
+                <label class="row">
+                  <div class="row-label">自动加载页数</div>
+                  <div class="row-ctl">
+                    <input type="range" id="setScrolls" min="4" max="60" step="2" />
+                    <span class="range-val" id="scrollsVal">40</span>
+                  </div>
+                </label>
+                <label class="row">
+                  <div class="row-label">实况图导出为 MP4</div>
+                  <div class="row-ctl">
+                    <label class="switch"><input type="checkbox" id="setDetectLive" checked /><span class="switch-track"></span></label>
+                  </div>
+                </label>
+                <div class="sheet-tip">实况图会导出为 MP4 视频，全程不转码、不压缩，画质与分辨率与原始一致。解析时就会逐条识别哪些作品是实况图，左侧作品卡片上会标「实况」；关掉「实况图导出为 MP4」则只保存实况图的静态图片部分。</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel browser-panel">
+            <div class="panel-head">
+              <div class="bp-title">
+                <span class="live-dot" id="liveDot"></span>
+                <span id="bpTitle">登录 / 浏览</span>
+              </div>
+              <div class="panel-tools">
+                <div class="tool-group">
+                  <button class="tool-btn" id="btnHome">回到首页</button>
+                  <span class="tool-sep" aria-hidden="true"></span>
+                  <button class="tool-btn" id="btnReload">刷新</button>
+                  <span class="tool-sep" aria-hidden="true"></span>
+                  <button class="tool-btn icon" id="btnViewFull" title="全屏预览（Esc 退出）" aria-label="全屏预览">
+                    <svg viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11.8 3.6h4.6v4.6M8.2 16.4H3.6v-4.6M16.4 3.6 11.4 8.6M3.6 16.4l5-5" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="browser-slot" id="browserSlot">
+              <div class="slot-hint">
+                <div class="slot-emoji">🐰</div>
+                <p>右侧是平台真实页面<br />首次使用请先登录，再粘贴主页链接</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+  <script src="app.js"></script>
+</body>
+</html>

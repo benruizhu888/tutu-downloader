@@ -1,0 +1,35 @@
+{
+  "data": {
+    "has_more": true,
+    "user": { "nickname": "兔兔酱" },
+    "notes": [
+      {
+        "note_id": "66f0a1b2c3d4e5f601234567",
+        "type": "normal",
+        "display_title": "周末的海边日记",
+        "user": { "nickname": "兔兔酱" },
+        "xsec_token": "ABxTk_token_1",
+        "cover": { "url_default": "https://sns-img-bd.xhscdn.com/2024/abc/cover1.jpg?imageView2/2/w/540/format/webp" }
+      },
+      {
+        "note_id": "66f0a1b2c3d4e5f601234568",
+        "type": "video",
+        "display_title": "海浪声音",
+        "user": { "nickname": "兔兔酱" },
+        "xsec_token": "ABxTk_token_2",
+        "cover": { "url_default": "https://sns-img-bd.xhscdn.com/2024/abc/cover2.jpg" },
+        "video": {
+          "media": {
+            "stream": {
+              "h264": [
+                { "master_url": "https://sns-video-bd.xhscdn.com/stream/1/110/258/01e7_720p.mp4", "width": 720, "height": 1280, "avg_bitrate": 1800000 },
+                { "master_url": "https://sns-video-bd.xhscdn.com/stream/1/110/258/01e7_1080p.mp4", "width": 1080, "height": 1920, "avg_bitrate": 3600000 }
+              ],
+              "h265": []
+            }
+          }
+        }
+      }
+    ]
+  }
+}

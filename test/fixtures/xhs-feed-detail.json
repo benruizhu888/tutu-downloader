@@ -1,0 +1,38 @@
+{
+  "data": {
+    "items": [
+      {
+        "id": "66f0a1b2c3d4e5f601234567",
+        "model_type": "note",
+        "note_card": {
+          "note_id": "66f0a1b2c3d4e5f601234567",
+          "type": "normal",
+          "display_title": "实况图与普通图混排",
+          "user": { "nickname": "兔兔酱" },
+          "image_list": [
+            {
+              "live_photo": true,
+              "url_default": "https://sns-img-bd.xhscdn.com/2024/abc/live_still.jpg?imageView2/2/w/1080",
+              "video": {
+                "media": {
+                  "stream": {
+                    "h264": [
+                      { "master_url": "https://sns-video-bd.xhscdn.com/stream/live_1.mp4", "width": 1440, "height": 1920, "avg_bitrate": 5000000 }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "url_default": "https://sns-img-bd.xhscdn.com/2024/abc/plain.jpg",
+              "info_list": [
+                { "image_scene": "WB_PRV", "url": "https://sns-img-bd.xhscdn.com/2024/abc/plain_prv.jpg?imageView2/2/w/240" },
+                { "image_scene": "WB_DFT", "url": "https://sns-img-bd.xhscdn.com/2024/abc/plain_dft.jpg?imageView2/2/w/1080" }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

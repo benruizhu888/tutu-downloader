@@ -1,0 +1,93 @@
+{
+  "status_code": 0,
+  "has_more": 1,
+  "aweme_list": [
+    {
+      "aweme_id": "7391234567890123456",
+      "desc": "三张图的实况作品",
+      "create_time": 1721300000,
+      "author": {
+        "nickname": "兔子摄影师",
+        "unique_id": "tutu_pic"
+      },
+      "image_post_info": {
+        "images": [
+          {
+            "display_image": {
+              "url_list": [
+                "https://p3-sign.douyinpic.com/tos-cn-i-0813/live1~tplv-dy-aweme-images:q75.webp?x-expires=1&x-signature=a"
+              ]
+            },
+            "video": {
+              "play_addr": {
+                "url_list": [
+                  "https://v3-web.douyinvod.com/abc/live1.mp4?x-expires=1"
+                ],
+                "width": 1080,
+                "height": 1440
+              }
+            },
+            "download_url_list": [
+              "https://p3-sign.douyinpic.com/tos-cn-i-0813/live1~tplv-dy-water-v2:q75.webp?x-expires=1&x-signature=a"
+            ]
+          },
+          {
+            "display_image": {
+              "url_list": [
+                "https://p3-sign.douyinpic.com/tos-cn-i-0813/plain2~tplv-dy-aweme-images:q75.webp?x-expires=1"
+              ]
+            },
+            "url_list": [
+              "https://p3-sign.douyinpic.com/tos-cn-i-0813/plain2~tplv-dy-aweme-images:q75.webp?x-expires=1&x-signature=b",
+              "https://p9-sign.douyinpic.com/tos-cn-i-0813/plain2~tplv-dy-aweme-images:q75.jpeg?x-expires=1&x-signature=b"
+            ],
+            "download_url_list": [
+              "https://p3-sign.douyinpic.com/tos-cn-i-0813/plain2~tplv-dy-water-v2:q75.webp?x-expires=1&x-signature=b"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "aweme_id": "7391234567890123457",
+      "desc": "普通视频作品",
+      "create_time": 1721200000,
+      "author": {
+        "nickname": "兔子摄影师"
+      },
+      "video": {
+        "play_addr": {
+          "url_list": [
+            "https://www.douyin.com/aweme/v1/playwm/?video_id=v0200&ratio=720p"
+          ],
+          "width": 720,
+          "height": 1280
+        },
+        "bit_rate": [
+          {
+            "bit_rate": 1200000,
+            "is_bytevc1": 0,
+            "play_addr": {
+              "url_list": [
+                "https://v3-web.douyinvod.com/abc/v720.mp4"
+              ],
+              "width": 720,
+              "height": 1280
+            }
+          },
+          {
+            "bit_rate": 3000000,
+            "is_bytevc1": 1,
+            "play_addr": {
+              "url_list": [
+                "https://v3-web.douyinvod.com/abc/v1080h265.mp4"
+              ],
+              "width": 1080,
+              "height": 1920
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

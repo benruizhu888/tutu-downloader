@@ -1,0 +1,40 @@
+{
+  "ok": 1,
+  "data": {
+    "has_more": true,
+    "list": [
+      {
+        "idstr": "5051234567890123",
+        "text_raw": "九宫格原图 <a href=\"#\">@好友</a>",
+        "created_at": "Wed Jul 16 12:00:00 +0800 2025",
+        "user": { "screen_name": "微博兔子" },
+        "pic_infos": {
+          "pic1": {
+            "large": { "url": "https://wx1.sinaimg.cn/mw690/abc123.jpg" },
+            "largest": { "url": "https://wx1.sinaimg.cn/large/abc123.jpg" }
+          },
+          "pic2": {
+            "large": { "url": "https://wx2.sinaimg.cn/mw690/def456.jpg" }
+          }
+        }
+      },
+      {
+        "idstr": "5051234567890124",
+        "text_raw": "一条视频微博",
+        "user": { "screen_name": "微博兔子" },
+        "page_info": {
+          "page_pic": { "url": "https://wx3.sinaimg.cn/large/cover789.jpg" },
+          "media_info": {
+            "stream_url": "https://f.video.weibocdn.com/o0/abc_sd.mp4",
+            "stream_url_hd": "https://f.video.weibocdn.com/o0/abc_hd.mp4"
+          }
+        }
+      },
+      {
+        "idstr": "5051234567890125",
+        "text_raw": "纯文字微博，不应出现在结果里",
+        "user": { "screen_name": "微博兔子" }
+      }
+    ]
+  }
+}

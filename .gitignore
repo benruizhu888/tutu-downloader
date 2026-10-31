@@ -1,0 +1,31 @@
+# ---- 依赖与构建产物 ----
+node_modules/
+dist/
+release/
+*.exe
+*.asar
+
+# ---- build 目录：只保留打包必需的图标，其余为本地抓包证据/截图/探针 ----
+# 抓包证据里含真实账号 id、xsec_token、Cookie 名称与本地绝对路径，不纳入版本控制
+build/*
+!build/icon.png
+!build/icon.ico
+!build/icons
+!build/icons/**
+
+# ---- 本地核验日志：含真实账号昵称、user id、xsec_token、Cookie 名称与本地绝对路径 ----
+docs/核验日志-*.txt
+
+# ---- 系统与编辑器 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log
+
+# ---- 运行时产物 ----
+tutu-e2e-shots/
+tutu-e2e-out-*/
+tutu-verify-*/
+*.tmp
